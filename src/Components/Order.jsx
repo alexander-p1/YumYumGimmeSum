@@ -8,22 +8,29 @@ const Order = () => {
   return (
     <div className='orderContainer'>
       <nav className="cart"><img src={union} alt="" /></nav>
+      <section className='orderSection'>
+        <hr />
+          <ul className="menuOrderList">
+            {foods.map((food) => (
+              <React.Fragment key={food.id}>
+                <li className="menuItem">
+                  <div className="menuItemHeader">
+                    <span className="foodName">{food.name} </span>
+                      <span className="dots">..............................</span>
+                      <span className="foodPrice"> {food.price} </span>
+                  </div>
+                </li>
+              </React.Fragment>
+            ))}
+          </ul>
+        <hr />
+      </section>
+
       <section>
-        <hr />
-          <ul className="menuList">
-                  {foods.map((food) => (
-                    <React.Fragment key={food.id}>
-                    <li className="menuItem">
-                      <div className="menuItemHeader">
-                        <span className="foodName">{food.name} </span>
-                        <span className="dots">..............................</span>
-                        <span className="foodPrice"> {food.price} </span>
-                      </div>
-                    </li>
-                    </React.Fragment>
-                  ))}
-                </ul>
-        <hr />
+            <footer className='orderFooter'>
+              <p className='totalAmount'></p>
+              <button className='takeMyMoney'>Take my money!</button>
+            </footer>
       </section>
     </div>
   )
