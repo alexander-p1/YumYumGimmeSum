@@ -2,8 +2,14 @@ import React from 'react'
 import "/src/styling/Order.scss"
 import union from '../assets/Union.svg'
 import Menu from './Menu'
+import { Navigate, useNavigate } from "react-router-dom";
 
 const Order = () => {
+
+  const navigate = useNavigate();
+    const handleClick = () => {
+      navigate('/eta')
+    }
 
   return (
     <div className='orderContainer'>
@@ -29,7 +35,7 @@ const Order = () => {
       <section>
             <footer className='orderFooter'>
               <p className='totalAmount'></p>
-              <button className='takeMyMoney'>Take my money!</button>
+              <button className='takeMyMoney' onClick={handleClick}>Take my money!</button>
             </footer>
       </section>
     </div>

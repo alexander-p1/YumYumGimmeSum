@@ -2,14 +2,20 @@ import React from "react";
 import "/src/styling/Menu.scss"
 import group from '../assets/Group 6.svg'
 import union from '../assets/Union.svg'
+import { Navigate, useNavigate } from "react-router-dom";
 
 const Menu = () => {
+
+  const navigate = useNavigate();
+  const handleClick = () => {
+    navigate('/Order')
+  }
 
   return <div className="container">
     <section className="menu">
       <nav className="nav">
         <span><img src={group} alt="" /></span>
-        <span className="union"><img src={union} alt="" /></span>
+        <span className="union"><img src={union} alt="" onClick={handleClick} /></span>
       </nav>
     </section>
 

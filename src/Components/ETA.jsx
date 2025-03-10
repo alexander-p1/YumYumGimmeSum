@@ -1,8 +1,11 @@
 import React from 'react'
+import "/src/styling/ETA.scss"
 
 const ETA = () => {
+
   return (
-    <div>ETA</div>
+    <div className='containerEta'>
+    </div>
   )
 }
 
