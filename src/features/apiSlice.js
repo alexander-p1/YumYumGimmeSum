@@ -72,7 +72,6 @@ export const fetchMenu = createAsyncThunk (
                 throw new Error(errorData.message || 'Failed to fetch menu');
             }
             const data = await response.json();
-            // console.log("Menu data:", data);
             return data;
         } catch (error) {
             return thunkAPI.rejectWithValue(error.message);

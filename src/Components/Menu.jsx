@@ -5,9 +5,11 @@ import union from '../assets/Union.svg'
 import { Navigate, useNavigate } from "react-router-dom";
 import { postKey, createTenant, fetchMenu } from '../features/apiSlice';
 import { useDispatch, useSelector } from "react-redux";
+import { addToCart } from '../features/orderSlice';
 
 const Menu = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { menu, loading } = useSelector(state => state.api);
 
   const wontons = menu.wontons || [];
@@ -50,7 +52,7 @@ const Menu = () => {
   }, [dispatch]);
 
   
-  const navigate = useNavigate();
+  
   const handleClick = () => {
     navigate('/Order')
   }
@@ -81,6 +83,7 @@ const Menu = () => {
                   </div>
                   <span>{food.description}</span>
                   <div className="ingredients">{Array.isArray(food.ingredients) ? food.ingredients.join(', ') : food.ingredients}</div>
+                  <button onClick={() => dispatch(addToCart(food))}>Add to Cart</button>
                 </li>
                 {index !== wontons.length - 1 && <hr />}
               </React.Fragment>
@@ -104,6 +107,7 @@ const Menu = () => {
                   </div>
                   <span> {drink.description} </span>
                   <div className="ingredients">{Array.isArray(drink.ingredients) ? drink.ingredients.join(', ') : drink.ingredients}</div>
+                  <button onClick={() => dispatch(addToCart(drink))}>Add to Cart</button>
                 </li>
                 {index !== drinks.length - 1 && <hr />}
               </React.Fragment>
@@ -127,6 +131,7 @@ const Menu = () => {
                   </div>
                   <span> {dip.description} </span>
                   <div className="ingredients">{Array.isArray(dip.ingredients) ? dip.ingredients.join(', ') : dip.ingredients}</div>
+                  <button onClick={() => dispatch(addToCart(dip))}>Add to Cart</button>
                 </li>
                 {index !== dips.length - 1 && <hr />}
               </React.Fragment>
