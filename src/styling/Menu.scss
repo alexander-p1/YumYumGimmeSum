@@ -41,6 +41,8 @@ body {
 
 .modal {
     position: fixed;
+    max-height: 100vh;
+    overflow-y: auto;
     top: 53%;
     left: 50%;
     transform: translate(-50%, -50%); 
