@@ -26,7 +26,7 @@ export const postKey = createAsyncThunk (
     }
 );
 
-/* Skapa ny tenant */
+/* Skapa en tenant */
 export const createTenant = createAsyncThunk (
     'api/createTenant',
     async (tenantData, thunkAPI) => {
@@ -78,8 +78,6 @@ export const fetchMenu = createAsyncThunk (
         }
     }
 );
-
-
 
 /* createSlice */
 const apiSlice = createSlice({

@@ -44,7 +44,7 @@ const Order = () => {
 
       <section>
             <footer className='orderFooter'>
-              <p className='totalAmount'></p>
+              <p className='totalAmount'>Totalt {totalAmount}</p>
               <button className='takeMyMoney' 
               onClick={handleClick} 
               >
