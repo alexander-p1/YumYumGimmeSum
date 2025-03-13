@@ -109,5 +109,15 @@ body {
 
     .addToCart {
         border: none;
+        border-radius: 5px;
+        height: 1.5rem;
+        width: 5rem;
+
+    }
+
+    .addToCart:hover {
+        cursor: pointer;
+        background-color: #948d8d;
+        transition-duration: 0.3s;
     }
 }

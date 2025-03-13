@@ -3,7 +3,7 @@ import "/src/styling/Menu.scss";
 import group from "../assets/Group 6.svg";
 import union from "../assets/Union.svg";
 import { Navigate, useNavigate } from "react-router-dom";
-import { postKey, fetchMenu } from "../features/apiSlice";
+import { postKey, fetchMenu, createTenant } from "../features/apiSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../features/orderSlice";
 
@@ -21,10 +21,10 @@ const Menu = () => {
       const keyResult = await dispatch(postKey("apiKey"));
 
       if (postKey.fulfilled.match(keyResult)) {
-        const uniqueName = `tenant-${Date.now()}-${Math.random()
-          .toString(36)
-          .substring(2, 8)}`;
+        const uniqueName = `${Math.random().toString(36)}`;
+        const tenantResult = await dispatch(createTenant({ "name": uniqueName }))
 
+        if (createTenant.fulfilled.match(tenantResult)) {
         const wontonResult = await dispatch(fetchMenu("wonton"));
         const drinkResult = await dispatch(fetchMenu("drink"));
         const dipResult = await dispatch(fetchMenu("dip"));
@@ -39,7 +39,8 @@ const Menu = () => {
           console.log("Dip items:", dipResult.payload.items);
         }
       }
-    };
+    }
+  }
     runApiCalls();
   }, [dispatch]);
 
@@ -105,7 +106,6 @@ const Menu = () => {
                     <span className="foodPrice"> {drink.price} kr</span>
                   </div>
                   <span> {drink.description} </span>
-                  <div className="ingredients"></div>
                   <button
                     className="addToCart"
                     onClick={() => dispatch(addToCart(drink))}
@@ -132,7 +132,6 @@ const Menu = () => {
                     <span className="foodPrice"> {dip.price} kr</span>
                   </div>
                   <span> {dip.description} </span>
-                  <div className="ingredients"></div>
                   <button
                     className="addToCart"
                     onClick={() => dispatch(addToCart(dip))}
