@@ -10,24 +10,21 @@ const Order = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { cartItems, totalAmount } = useSelector((state) => state.order);
-  const { tenantData } = useSelector((state) => state.api);
 
   const orderData = {
     items: cartItems.map((items) => items.id)}
-  console.log("Order items:", orderData);
 
   const handleClick = () => {
     dispatch(
       placeOrder({
-        tenant: tenantData.tenant,
         orderData
       })
     ).then((result) => {
-      console.log('order result', result);
       if (!result.error) {
         navigate("/eta");
       } else {
-        alert(`Failed to place order: ${result.payload}`);
+        confirm('Beställ gärna först!');
+        navigate('/')
       }
     });
   
@@ -40,10 +37,9 @@ const Order = () => {
       </nav>
       <section className="orderSection">
         <hr />
-        {cartItems.length > 0 ? (
           <ul className="menuOrderList">
             {cartItems.map((items) => (
-              <React.Fragment key={items.id}>
+              <div key={items.id}>
                 <li className="menuItem">
                   <div className="menuItemHeader">
                     <span className="foodName">
@@ -51,26 +47,19 @@ const Order = () => {
                     </span>
                     <span className="dots">..............................</span>
                     <span className="foodPrice">
-                      {" "}
-                      {items.price * items.quantity}{" "}
+                      {items.price * items.quantity}{"kr"}
                     </span>
                   </div>
                   <button onClick={() => dispatch(removeFromCart(items.id))}>
-                    Remove
+                    Ta bort
                   </button>
                 </li>
-              </React.Fragment>
+              </div>
             ))}
           </ul>
-        ) : (
-          <p className="emptyCart">Your cart is empty</p>
-        )}
         <hr />
-      </section>
-
-      <section>
         <footer className="orderFooter">
-          <p className="totalAmount">Totalt {totalAmount}</p>
+          <p className="totalAmount">Totalt <span>{totalAmount} kr</span> </p>
           <button className="takeMyMoney" onClick={handleClick}>
             Take my money!
           </button>

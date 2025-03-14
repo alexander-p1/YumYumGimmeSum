@@ -31,21 +31,19 @@ export const createTenant = createAsyncThunk(
   'api/createTenant',
   async (tenantData, thunkAPI) => {
     try {
-      const { id, ...allowedData } = tenantData;
-      console.log('allowed data', allowedData)
+      const { ...allowedData } = tenantData;
       const response = await fetch(`${url}tenants`, {
         method: 'POST',
         headers: {
           'x-zocom': 'apiKey',
         },
-        body: JSON.stringify(allowedData) 
+        body: JSON.stringify(allowedData)
       });
       if (!response.ok) {
         const errorData = await response.json();
-        throw new Error(errorData.message || 'Failed to create tenant');
+        throw new Error(errorData.message);
       }
       const data = await response.json();
-      console.log('Tenant created:', data);
       return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -67,7 +65,7 @@ export const fetchMenu = createAsyncThunk(
       })
       if (!response.ok) {
         const errorData = await response.json();
-        throw new Error(errorData.message || 'Failed to fetch menu');
+        throw new Error(errorData.message);
       }
       const data = await response.json();
       return data;
@@ -81,8 +79,6 @@ export const placeOrder = createAsyncThunk(
   'api/placeOrder',
   async ({ id, orderData }, thunkAPI) => {
     try {
-      // const state = thunkAPI.getState();
-
       const response = await fetch(`${url}${id}/orders`, {
         method: 'POST',
         headers: {
@@ -92,12 +88,10 @@ export const placeOrder = createAsyncThunk(
         },
         body: JSON.stringify(orderData)
       });
-      console.log("Order Data:", JSON.stringify(orderData));
 
       if (!response.ok) {
         const errorData = await response.json();
-        console.log("Error response data:", errorData);
-        throw new Error(errorData.message || 'Failed to place order');
+        throw new Error(errorData.message);
       }
 
       const data = await response.json();
@@ -113,9 +107,6 @@ export const placeOrder = createAsyncThunk(
 const apiSlice = createSlice({
   name: 'api',
   initialState: {
-    keyData: null,
-    orderData: null,
-    tenantData: null,
     menu: {},
     loading: false,
     error: null,
@@ -180,20 +171,7 @@ const apiSlice = createSlice({
         state.error = action.payload;
       })
 
-    // .addCase(placeOrder.fulfilled, (state, action) => {
-    //   state.orderData = action.payload.order; // Save the order data, including eta and id
-    //   state.loading = false;
-    // });
-
-
-
   },
 });
-
-
-
-
-
-
 
 export default apiSlice.reducer;

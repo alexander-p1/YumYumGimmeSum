@@ -22,15 +22,15 @@ const Menu = () => {
 
       if (postKey.fulfilled.match(keyResult)) {
         const uniqueName = `${Math.random().toString(36)}`;
-        const tenantResult = await dispatch(createTenant({ "name": uniqueName }))
+        const tenantResult = await dispatch(createTenant({ name: uniqueName }));
 
         if (createTenant.fulfilled.match(tenantResult)) {
           dispatch(fetchMenu("wonton"));
           dispatch(fetchMenu("drink"));
           dispatch(fetchMenu("dip"));
         }
-    }
-  }
+      }
+    };
     runApiCalls();
   }, [dispatch]);
 
@@ -57,18 +57,18 @@ const Menu = () => {
         </header>
 
         {/* Wontons Section */}
-        <>
+        <section>
           <h2 className="menuTitle">Wontons</h2>
           <ul className="menuList">
             {wontons.map((food) => (
-              <React.Fragment key={food.id}>
+              <div key={food.id}>
                 <li className="menuItem">
                   <div className="menuItemHeader">
                     <span className="foodName">{food.name} </span>
                     <span className="dots">..............................</span>
                     <span className="foodPrice"> {food.price} kr</span>
                   </div>
-                  <span>{food.description}</span>
+                  {/* <span>{food.description}</span> */}
                   <div className="ingredients">{food.ingredients + ","}</div>
                   <button
                     className="addToCart"
@@ -78,66 +78,44 @@ const Menu = () => {
                   </button>
                 </li>
                 <hr />
-              </React.Fragment>
+              </div>
             ))}
           </ul>
-        </>
+        </section>
 
         {/* Drinks Section */}
-        <>
+        <section className="menuButtonContainer">
           <h2 className="menuTitle">Drinks</h2>
-          <ul className="menuList">
             {drinks.map((drink) => (
-              <React.Fragment key={drink.id}>
-                <li className="menuItem">
-                  <div className="menuItemHeader">
-                    <span className="foodName">{drink.name} </span>
-                    <span className="dots">..............................</span>
-                    <span className="foodPrice"> {drink.price} kr</span>
-                  </div>
-                  <span> {drink.description} </span>
-                  <div>
-                  <button
-                    className="addToCart"
-                    onClick={() => dispatch(addToCart(drink))}
-                  >
-                    Lägg till
-                  </button>
-                  </div>
-                </li>
-                <hr />
-              </React.Fragment>
+              <button 
+              key={drink.id}
+              className="menuButton"
+              onClick={() => dispatch(addToCart(drink))}
+              >
+                <div className="menuButtonContent">
+                  <span className="foodName">{drink.name + ' '}</span>
+                  <span className="foodPrice">{drink.price + 'kr'}</span>
+                </div>
+              </button>
             ))}
-          </ul>
-        </>
+        </section>
 
         {/* Dips Section */}
-        <>
+        <section className="menuButtonContainer">
           <h2 className="menuTitle">Dip</h2>
-          <ul className="menuList">
             {dips.map((dip) => (
-              <React.Fragment key={dip.id}>
-                <li className="menuItem">
-                  <div className="menuItemHeader">
-                    <span className="foodName">{dip.name} </span>
-                    <span className="dots">..............................</span>
-                    <span className="foodPrice"> {dip.price} kr</span>
-                  </div>
-                  <span> {dip.description} </span>
-                  <div>
-                  <button
-                    className="addToCart"
-                    onClick={() => dispatch(addToCart(dip))}
-                  >
-                    Lägg till
-                  </button>
-                  </div>
-                </li>
-                <hr />
-              </React.Fragment>
+              <button 
+              key={dip.id}
+              className="menuButton"
+              onClick={() => dispatch(addToCart(dip))}
+              >
+                <div className="menuButtonContent">
+                  <span className="foodName">{dip.name + ' '}</span>
+                  <span className="foodPrice">{dip.price + 'kr'}</span>
+                </div>
+              </button>
             ))}
-          </ul>
-        </>
+        </section>
       </dialog>
     </div>
   );

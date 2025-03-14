@@ -11,7 +11,11 @@ const ETA = () => {
   const dispatch = useDispatch();
   const { orderData } = useSelector((state) => state.api);
 
-  const eta = orderData ? orderData.eta : "";
+  const eta = orderData ? new Date(orderData.eta).toLocaleString("sv-SE", {
+    hour: '2-digit',
+    minute: '2-digit',
+  })  : "";
+
   const orderValue = orderData ? orderData.id : "";
 
   const handleClick = () => {
@@ -28,11 +32,15 @@ const ETA = () => {
         <img src={boxtop} alt="" className="boxtopEta" />
       </section>
 
-      <section className="etaSection">
+      <header className="etaSection">
         <h1>Dina wontons tillagas!</h1>
+      </header>
+      <br />
+      <section className="etaSection">
         <span>
-          <h2> {orderValue} </h2>
-          <h4> {eta} </h4>
+          <h2>Redo: {eta} </h2>
+          <br />
+          <h3>Ordernummer: {'#' + orderValue} </h3>
         </span>
       </section>
 

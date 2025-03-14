@@ -25,6 +25,7 @@ body {
     flex-direction: column;
 
     background: whitesmoke;
+
     .cart {
         display: flex;
         flex-direction: row-reverse;
@@ -45,9 +46,12 @@ body {
         align-items: center;
 
         font-size: larger;
+        height: 31rem;
+        overflow-y: auto;
     }
 
     .menuItem {
+
         margin: 1rem 0 1rem 0;
     }
 
@@ -58,12 +62,14 @@ body {
     .orderFooter {
         display: flex;
         flex-direction: column;
-        margin-top: 86%;
+        margin-top: 30%;
     }
 
     .totalAmount {
         display: flex;
         align-items: center;
+        justify-content: space-around;
+        font-size: larger;
 
         height: 4rem;
         border-radius: 0.5rem;
@@ -73,15 +79,16 @@ body {
 
     .takeMyMoney {
         height: 4rem;
+        font-size: larger;
 
         border: none;
         border-radius: 0.5rem;
-        background: rgb(58, 57, 57);
+        background: rgb(129, 128, 128);
     }
 
     .takeMyMoney:hover {
         cursor: pointer;
-        box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+        box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
     }
 
 }
