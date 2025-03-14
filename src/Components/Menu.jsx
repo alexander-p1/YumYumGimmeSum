@@ -25,20 +25,10 @@ const Menu = () => {
         const tenantResult = await dispatch(createTenant({ "name": uniqueName }))
 
         if (createTenant.fulfilled.match(tenantResult)) {
-        const wontonResult = await dispatch(fetchMenu("wonton"));
-        const drinkResult = await dispatch(fetchMenu("drink"));
-        const dipResult = await dispatch(fetchMenu("dip"));
-
-        if (fetchMenu.fulfilled.match(wontonResult)) {
-          console.log("Wonton items:", wontonResult.payload.items);
+          dispatch(fetchMenu("wonton"));
+          dispatch(fetchMenu("drink"));
+          dispatch(fetchMenu("dip"));
         }
-        if (fetchMenu.fulfilled.match(drinkResult)) {
-          console.log("Drink items:", drinkResult.payload.items);
-        }
-        if (fetchMenu.fulfilled.match(dipResult)) {
-          console.log("Dip items:", dipResult.payload.items);
-        }
-      }
     }
   }
     runApiCalls();
@@ -106,12 +96,14 @@ const Menu = () => {
                     <span className="foodPrice"> {drink.price} kr</span>
                   </div>
                   <span> {drink.description} </span>
+                  <div>
                   <button
                     className="addToCart"
                     onClick={() => dispatch(addToCart(drink))}
                   >
-                    Lägg til
+                    Lägg till
                   </button>
+                  </div>
                 </li>
                 <hr />
               </React.Fragment>
@@ -132,22 +124,20 @@ const Menu = () => {
                     <span className="foodPrice"> {dip.price} kr</span>
                   </div>
                   <span> {dip.description} </span>
+                  <div>
                   <button
                     className="addToCart"
                     onClick={() => dispatch(addToCart(dip))}
                   >
                     Lägg till
                   </button>
+                  </div>
                 </li>
                 <hr />
               </React.Fragment>
             ))}
           </ul>
         </>
-
-        {wontons.length === 0 && drinks.length === 0 && dips.length === 0 && (
-          <p>No menu items available.</p>
-        )}
       </dialog>
     </div>
   );

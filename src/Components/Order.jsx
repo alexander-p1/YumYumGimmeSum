@@ -1,7 +1,6 @@
 import React from "react";
 import "/src/styling/Order.scss";
 import union from "../assets/Union.svg";
-import Menu from "./Menu";
 import { Navigate, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { removeFromCart } from "../features/orderSlice";
@@ -11,14 +10,8 @@ const Order = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { cartItems, totalAmount } = useSelector((state) => state.order);
-  const { tenantData, loading } = useSelector((state) => state.api);
+  const { tenantData } = useSelector((state) => state.api);
 
-  if (!tenantData || !tenantData.id) {
-    console.log("Tenant data is missing:", tenantData);
-    return;
-  }
-
-  
   const orderData = {
     items: cartItems.map((items) => items.id)}
   console.log("Order items:", orderData);
@@ -39,7 +32,6 @@ const Order = () => {
     });
   
   };
-
 
   return (
     <div className="orderContainer">

@@ -16,10 +16,9 @@ export const postKey = createAsyncThunk(
       });
       if (!response.ok) {
         const errorData = await response.json();
-        throw new Error(errorData.message || 'Failed to post API key');
+        throw new Error(errorData.message);
       }
       const data = await response.json();
-      console.log(data);
       return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -33,14 +32,13 @@ export const createTenant = createAsyncThunk(
   async (tenantData, thunkAPI) => {
     try {
       const { id, ...allowedData } = tenantData;
+      console.log('allowed data', allowedData)
       const response = await fetch(`${url}tenants`, {
         method: 'POST',
         headers: {
           'x-zocom': 'apiKey',
-          'Content-Type': 'application/json',
-          'accept': 'application/json',
         },
-        body: JSON.stringify(allowedData)
+        body: JSON.stringify(allowedData) 
       });
       if (!response.ok) {
         const errorData = await response.json();
@@ -153,7 +151,7 @@ const apiSlice = createSlice({
       })
       .addCase(fetchMenu.fulfilled, (state, action) => {
         state.loading = false;
-        const menuType = action.meta.arg; // This is the 'type' parameter
+        const menuType = action.meta.arg;
         if (action.payload && action.payload.items) {
           if (menuType === 'wonton') {
             state.menu.wontons = action.payload.items;

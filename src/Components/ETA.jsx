@@ -5,7 +5,6 @@ import boxtop from "../assets/boxtop 1.png";
 import { Navigate, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { clearCart } from "../features/orderSlice";
-import Order from "./Order";
 
 const ETA = () => {
   const navigate = useNavigate();
@@ -31,8 +30,10 @@ const ETA = () => {
 
       <section className="etaSection">
         <h1>Dina wontons tillagas!</h1>
-        <h2> {orderValue} </h2>
-        <h4> {eta} </h4>
+        <span>
+          <h2> {orderValue} </h2>
+          <h4> {eta} </h4>
+        </span>
       </section>
 
       <footer className="footerBtn">
